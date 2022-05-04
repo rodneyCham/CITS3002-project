@@ -1,0 +1,64 @@
+Notes from Lecture Week 9
+Once getting through parsing we will be a third of the way through apparently
+total lines for C client is 610 but most of those are comments, probably around 450
+Guy in front of me has massive weeb desktop picture of anime girls - kinda creepy
+system calls from 2002, dup2, select, handling signals ..? - discussed later
+tutorials for networking that we have been referred to apparently, we are allowed to cut and past as long as we include attribution
+although there are 600 lines, we may only need to write 100 of those lines ourselves
+good thing about doing practical project as opposed to theoretical is that we already have testing tools like ls and compiler
+still expect good programming practices e.g. separating related code into different files
+
+he has a common file with a header called protocol.h
+talking about ways c and python can communicate - e.g. integers and strings (human readable or formatted integer strings) are good to transmit
+
+he offended someone by calling something "common sense"
+
+enumerated type of types of packets that need to go back and forth between client and server (common code)
+typedef enum { ... } CMD;
+asking and sending cost (QUOTE)
+sending file
+executing comman
+returning status, stdout, stderr and file
+
+typdef struct { ... } HEADER -> for adding to each packet , holds command, length and int intreply
+
+
+this stuff should be obvious ( i guess it kinda is when we get around to thinking about it)
+
+We just need to have an equivalent header file in python, e.g. python enumeration, etc
+
+technically you could automate the generation of the common files into c and py if you were a weirdo
+
+he said our question was reasonable Yay
+he says his response is trust me its simple
+
+he just ruined my thinking im smart by telling the replace hash by null byte
+
+tab != space (\t) obvious
+make sure editor doesn't replace tabs with spaces, we don't need to deal with that in our code
+
+can pass commands to final executable file, e.g. parse and run multiple different Rakefiles, specify with name, default to just Rakefile
+he has option to print verbose
+option to change port of server to run multiple clients on same machine and servers at once
+
+printing out standard errors like perr, e.g. if there are no servers to connect to "connect: connection refused"
+
+c server is around same size as client -> can share some code, but he has replicated it
+
+he has two util files, myexit and something else (newfile)
+
+running locally means contacting rakeserver on localhost (client doesn't actually execute commands at end of project)
+
+he parses into data structures, maybe we should do that e.g. char** lines, int lCount 
+
+when server is running multiple processes, he uses different temporary directory, so that things do not interfere with eachother
+
+example he went through:
+  client sends "cal" command to server
+  host returns stdout of cal to client
+  
+to find out which file is output, check for the newest file - can copy and paste from 2002
+
+example for "bidding" between different servers with QUOTE and COST (he generates random number??)
+
+start testing the file transmission using files with known size and content instead of compiled files -> write util function newfile for testing that just puts random bytes
