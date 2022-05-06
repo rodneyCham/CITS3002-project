@@ -7,8 +7,6 @@
 
 #define MAX_LINE_LEN 512
 
-void read_line(FILE* fp, char* buf);
-
 Action* parseAction(FILE* fp, char* buf);
 
 Actionset* parseActionset(FILE* fp, char* buf);
