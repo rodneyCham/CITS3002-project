@@ -1,8 +1,6 @@
-#include <stdbool.h>
-#include <stdio.h>
+
 #include <stdlib.h>
 #include <string.h>
-
 
 #include "rakefile.h"
 
@@ -12,10 +10,20 @@
 Action* createAction() {
 	Action* action = malloc(sizeof(Action));
 
+	action->remote = false;
+
 	action->requirements = malloc(sizeof(char*));
 	action->rCount = 0;
 
 	return action;
+}
+
+void addRequirements(Action* action, int rCount, char** requirements) {
+	action->rCount = rCount;
+	for(int i = 0; i < rCount; i++) {
+		action->requirements[i] = malloc(sizeof(char) * (strlen(requirements[i]) + 1));
+		strcpy(action->requirements[i], requirements[i]);
+	}
 }
 
 
@@ -38,11 +46,11 @@ void addAction(Actionset* as, Action* action) { // Actionset as
 
 
 
+
 Rakefile* createRakefile() {
 	Rakefile* rf = malloc(sizeof(Rakefile));
 
-// dont know if this is necessary given how realloc works???
-	rf->hosts = malloc(sizeof(char*)); // this will make it so that there is always one more byte than is
+	rf->hosts = malloc(sizeof(char*));
 	rf->hCount = 0;
 
 	rf->actionsets = malloc(sizeof(Actionset*));
@@ -56,10 +64,3 @@ void addActionset(Rakefile* rf, Actionset* as) {
 	rf->actionsets = realloc(rf->actionsets, rf->asCount * sizeof(Actionset*));
 	rf->actionsets[rf->asCount - 1] = as;
 }
-
-
-
-
-
-
-
