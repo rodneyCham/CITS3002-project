@@ -11,6 +11,6 @@ Action* parseAction(FILE* fp, char* buf);
 
 Actionset* parseActionset(FILE* fp, char* buf);
 
-Rakefile* parseRakefile(FILE* fp, char* buf);
+Rakefile* parseRakefile(char* filename);
 
 #endif
