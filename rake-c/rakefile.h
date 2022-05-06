@@ -26,7 +26,7 @@ typedef struct Actionset {
 
 // A struct to store the data for the Rakefile
 typedef struct Rakefile {
-	int port;		// the default port
+	char* port;		// the default port (may as well be string because never used as int)
 
 	char** hosts; 		// array of host addresses, including ports (e.g. https://localhost:6030)
 	int hCount;		// the number of hosts to connect to
@@ -37,6 +37,7 @@ typedef struct Rakefile {
 
 
 Action* createAction();
+void addRequirements(Action* action, int rCount, char** requirements);
 
 Actionset* createActionset();
 void addAction(Actionset* as, Action* action);
