@@ -1,9 +1,24 @@
 
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+
 #include "rakefile.h"
 
-
-void execAction(Action* act) {
+pid_t execAction(Action* act) {
+	
+	pid_t pid = fork();
+	
+	if(pid == 0) { // we are in the child process
+		execl("./test_command", "./test_command", act->command, (char*)NULL);
+		return 0;
+	}
+	else { // we are in the parent process
+		return pid;
+	}
+	
+	/*
 	printf("\t%s", act->command);
 	printf(" | is ");
 	if(!act->remote) printf("not ");
@@ -14,13 +29,24 @@ void execAction(Action* act) {
 			printf("%s ", act->requirements[k]);
 		}
 	}
+	*/
 }
 
 void execActionset(Actionset* as) {
 	printf("Actionset: (%i action/s)\n", as->aCount);
+	
+	pid_t* pids = malloc(as->aCount * sizeof(pid_t*));
+	
 	for(int i = 0; i < as->aCount; i++) {
-		execAction(as->actions[i]);
-		printf("\n");
+		pids[i] = execAction(as->actions[i]);
+		 // atm we are waiting for each action to finish before executing the next, but really, each actionset, we should start all processes consecutively then wait for them all to return
+		// printf("\n");
+	}
+	
+	for(int i = 0; i < as->aCount; i++) {
+		// printf("\t\tbegan waiting for %i\n", pids[i]);
+		waitpid(pids[i], NULL, 0);
+		// printf("\t\tfinished waiting for %i\n", pids[i]);
 	}
 }
 
