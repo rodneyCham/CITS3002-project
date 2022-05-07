@@ -12,3 +12,6 @@ build: rake-c.c $(OBJ)
 
 clean:
 	@rm -f $(OBJ)
+
+test:
+	$(CC) $(CFLAGS) -o test_command test_command.c
