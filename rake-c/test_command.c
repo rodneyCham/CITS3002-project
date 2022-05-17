@@ -6,15 +6,15 @@
 int main(int argc, char** argv) {
 
 	if(argc != 2) {
-		printf("Failed execution\n");
+		printf("\t\033[0;36mtest_command\033[0;37m: Failed execution\n");
 		return -1;
 	}
 	else {
 		srand(getpid());
 
 		int seconds = rand() % 5 + 1;
-		sleep(mu);
-		printf("\tExecuted the command: \"%s\" (%i seconds)\n", argv[1], seconds);
+		sleep(seconds);
+		printf("\t\033[0;36mtest_command\033[0;37m: Executed the command: \"%s\" (%i seconds)\n", argv[1], seconds);
 		return 0;
 	}
 }
